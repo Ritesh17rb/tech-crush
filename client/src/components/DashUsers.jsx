@@ -18,7 +18,7 @@ const DashUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(import.meta.env.VITE_SERVER_DOMAIN + `/api/user/getusers`);
+        const res = await fetch(`/api/user/getusers`);
         const data = await res.json();
 
         if (res.ok) {
@@ -41,7 +41,7 @@ const DashUsers = () => {
     const startIndex = users.length;
     try {
       const res = await fetch(
-        import.meta.env.VITE_SERVER_DOMAIN + `/api/post/getusers?startIndex=${startIndex}`
+        `/api/post/getusers?startIndex=${startIndex}`
       );
       const data = await res.json();
 
@@ -58,7 +58,7 @@ const DashUsers = () => {
 
   const handleDeleteUser = async (req, res, next) => {
     try {
-      const res = await fetch(import.meta.env.VITE_SERVER_DOMAIN + `/api/user/delete/${userIdToDelete}`, {
+      const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
         method: "DELETE",
       });
 
