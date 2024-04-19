@@ -7,6 +7,7 @@ import postRoutes from './routes/post.route.js';
 import commentRoutes from './routes/comment.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -14,22 +15,21 @@ mongoose.connect(process.env.MONGO)
     .then(() => console.log('MongoDB is Connected!'))
     .catch(err => console.log(err));
 
-const __dirname = path.resolve();
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-const app = express()
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
-});
-
+// Define routes...
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
 // Serve static files from the root directory of the client
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 app.use(express.static(path.join(__dirname, 'client')));
 
 // Serve index.html for any other route
@@ -45,4 +45,8 @@ app.use((err, req, res, next) => {
         statusCode,
         message,
     });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
