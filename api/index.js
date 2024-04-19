@@ -8,13 +8,11 @@ import commentRoutes from './routes/comment.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 
-
 dotenv.config();
 
 mongoose.connect(process.env.MONGO)
-.then(() => console.log('MongoDB is Connected!'))
-.catch(err => console.log(err));
-
+    .then(() => console.log('MongoDB is Connected!'))
+    .catch(err => console.log(err));
 
 const __dirname = path.resolve();
 
@@ -23,7 +21,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.listen(3000, () => {
-    console.log("Server is running on port 3000");   
+    console.log("Server is running on port 3000");
 });
 
 app.use("/api/user", userRoutes);
@@ -31,18 +29,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
-app.use(express.static(path.join(__dirname, 'client/dist')));
+// Serve static files from the root directory of the client
+app.use(express.static(path.join(__dirname, 'client')));
 
+// Serve index.html for any other route
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
-
-
-
-app.get('/', (req, res) => {
-    res.send("Hello from Node API server!");
-});
-
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
@@ -51,6 +44,5 @@ app.use((err, req, res, next) => {
         success: false,
         statusCode,
         message,
-    });    
+    });
 });
-
