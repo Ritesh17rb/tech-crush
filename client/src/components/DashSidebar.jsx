@@ -25,7 +25,7 @@ const DashSidebar = () => {
 
   const handleSignOut = async () => {
     try {
-      const res = await fetch(`/api/user/signout`, {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/api/user/signout`, {
         method: "POST",
       });
 

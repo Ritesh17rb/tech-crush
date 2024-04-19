@@ -26,7 +26,7 @@ export default function DashboardComp() {
 
     const fetchUsers = async () => {
       try {
-        const res = await fetch('/api/user/getusers?limit=5');
+        const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/api/user/getusers?limit=5`);
         const data = await res.json();
         if (res.ok) {
           setUsers(data.users);
@@ -40,7 +40,7 @@ export default function DashboardComp() {
 
     const fetchPosts = async () => {
       try {
-        const res = await fetch('/api/post/getposts?limit=5');
+        const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/api/post/getposts?limit=5`);
         const data = await res.json();
         if (res.ok) {
           setPosts(data.posts);
@@ -54,7 +54,7 @@ export default function DashboardComp() {
 
     const fetchComments = async () => {
       try {
-        const res = await fetch('/api/comment/getComments?limit=5');
+        const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/api/comment/getComments?limit=5`);
         const data = await res.json();
         if (res.ok) {
           setComments(data.comments);

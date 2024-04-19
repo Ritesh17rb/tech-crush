@@ -148,7 +148,7 @@ const DashProfile = () => {
     setShowModal(false);
     try {
       dispatch(deleteStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
       });
 
@@ -167,7 +167,7 @@ const DashProfile = () => {
 
   const handleSignOut = async () => {
     try {
-      const res = await fetch(`/api/user/signout`, {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_DOMAIN}/api/user/signout`, {
         method: "POST",
       });
 
