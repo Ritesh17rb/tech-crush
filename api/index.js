@@ -13,15 +13,6 @@ dotenv.config();
 
 const app = express();
 
-// CORS middleware
-app.use(
-    cors({
-        origin: '*',
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        credentials: true,
-    })
-);
-
 // Body parser middleware
 app.use(express.json());
 app.use(cookieParser());
@@ -29,6 +20,15 @@ app.use(cookieParser());
 // Serve static files
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, 'client/dist')));
+
+// CORS middleware
+app.use(
+    cors({
+        origin: ['http://localhost:5173'], // Add your frontend URL here
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true,
+    })
+);
 
 // API routes
 app.use('/api/user', userRoutes);
