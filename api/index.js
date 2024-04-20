@@ -26,12 +26,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-
-
-
 // Serve static files
 const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, 'client/dist')));
+app.use(express.static(path.join(__dirname, 'client')));
 
 // API routes
 app.use('/api/user', userRoutes);
@@ -41,7 +38,7 @@ app.use('/api/comment', commentRoutes);
 
 // Serve index.html for any other route
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
 
 // Error handler middleware
