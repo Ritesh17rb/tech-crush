@@ -17,12 +17,14 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// CORS middleware
-app.use(cors({
-    origin: 'https://tech-crush-qtxn.vercel.app/',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
-}));
+const corsOptions = {
+    origin: 'https://tech-crush-qtxn.vercel.app',
+    methods: ['GET', 'POST'], // Add other HTTP methods if needed
+    credentials: true, // Allow sending cookies
+};
+
+app.use(cors(corsOptions));
+
 
 
 // Serve static files
