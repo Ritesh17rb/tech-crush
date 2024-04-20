@@ -21,9 +21,11 @@ const corsOptions = {
     origin: 'https://tech-crush-qtxn.vercel.app',
     methods: ['GET', 'POST'], // Add other HTTP methods if needed
     credentials: true, // Allow sending cookies
+    exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar'], // Add any additional headers you want to expose
 };
 
 app.use(cors(corsOptions));
+
 
 
 
