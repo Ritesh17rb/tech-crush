@@ -17,18 +17,17 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+// CORS middleware
+app.use(cors({
+    origin: 'https://tech-crush-qtxn.vercel.app/',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+}));
+
+
 // Serve static files
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, 'client/dist')));
-
-// CORS middleware
-app.use(
-    cors({
-        origin: ['http://localhost:5173'], // Add your frontend URL here
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        credentials: true,
-    })
-);
 
 // API routes
 app.use('/api/user', userRoutes);
